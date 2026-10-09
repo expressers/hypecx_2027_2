@@ -1,0 +1,31 @@
+// Estúdio de emissão nocturno: tinta, sinal magenta, portadora violeta.
+:root {
+  color-scheme: dark;
+
+  --ink: #0b0912;
+  --ink-2: #0f0c17;
+  --panel: #17131f;
+  --line: rgb(243 238 246 / 0.12);
+  --line-2: rgb(243 238 246 / 0.24);
+  --paper: #f3eef6;
+  --mute: #aaa3b9;
+  --faint: rgb(243 238 246 / 0.55);
+
+  --magenta: #e0247a;
+  --magenta-deep: #b81a62;
+  --violet: #5b3fd6;
+  --violet-hi: #a493ff;
+
+  --font-display: "Anybody Variable", "Arial Narrow", sans-serif;
+  --font-text: "Geist Variable", system-ui, sans-serif;
+  --font-mono: "Geist Mono Variable", ui-monospace, monospace;
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-io: cubic-bezier(0.77, 0, 0.175, 1);
+
+  --bar-h: 64px;
+  --gutter: clamp(16px, 4vw, 56px);
+  --radius: 14px;
+}
+
+// z-index: 1 conteúdo · 50 barra · 60 estática de sintonia · 100 skip link

@@ -1,0 +1,309 @@
+html {
+  background: var(--ink);
+  scroll-padding-top: calc(var(--bar-h) + 8px);
+  scrollbar-color: #3b3250 var(--ink);
+  -webkit-text-size-adjust: 100%;
+
+  @media (prefers-reduced-motion: no-preference) {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-text);
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+  caret-color: var(--magenta);
+}
+
+::selection {
+  background: var(--magenta);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid #ff5ca2;
+  outline-offset: 3px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--ink);
+}
+::-webkit-scrollbar-thumb {
+  background: #3b3250;
+  border-radius: 999px;
+  border: 2px solid var(--ink);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.shell {
+  width: min(100% - 2 * var(--gutter), 1400px);
+  margin-inline: auto;
+}
+
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 12px;
+  z-index: 100;
+  background: var(--paper);
+  color: var(--ink);
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-weight: 600;
+
+  &:focus {
+    left: 12px;
+  }
+}
+
+// Tipografia partilhada ---------------------------------------------------
+.display-2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-variation-settings: "wdth" 112, "wght" 720;
+  font-size: clamp(2.6rem, 6vw, 5.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.025em;
+  margin: 0;
+  text-wrap: balance;
+}
+
+.lede {
+  color: var(--mute);
+  font-size: clamp(1rem, 1.3vw, 1.2rem);
+  max-width: 56ch;
+  margin: 0;
+  text-wrap: pretty;
+}
+
+// Botões -------------------------------------------------------------------
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  height: 48px;
+  padding: 0 1.3rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font: 600 15px/1 var(--font-text);
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    transform 160ms var(--ease-out),
+    background-color 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease;
+
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+.btn-sm {
+  height: 38px;
+  padding: 0 1rem;
+  font-size: 14px;
+}
+
+.btn-signal {
+  background: var(--magenta);
+  color: #fff;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--paper);
+  border-color: var(--line-2);
+}
+
+.icon-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  border: 1px solid var(--line-2);
+  display: grid;
+  place-items: center;
+  background: transparent;
+  color: var(--paper);
+  cursor: pointer;
+  transition:
+    transform 160ms var(--ease-out),
+    border-color 200ms ease;
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-signal:hover {
+    background: var(--magenta-deep);
+  }
+  .btn-ghost:hover,
+  .icon-btn:hover {
+    border-color: var(--magenta);
+  }
+}
+
+// Formulário "Avisem-me" ----------------------------------------------------
+.notify {
+  max-width: 520px;
+}
+
+.notify-label {
+  display: block;
+  font-size: 14px;
+  color: var(--mute);
+  margin-bottom: 10px;
+}
+
+.notify-row {
+  display: flex;
+  gap: 6px;
+  padding: 5px;
+  border-radius: 999px;
+  background: rgb(23 19 31 / 0.88);
+  border: 1px solid var(--line-2);
+  transition: border-color 200ms ease;
+
+  &:focus-within {
+    border-color: var(--magenta);
+  }
+
+  &:has(input[aria-invalid="true"]) {
+    border-color: #ff7aa8;
+  }
+
+  input {
+    flex: 1 1 0;
+    width: 0;
+    min-width: 0;
+    background: transparent;
+    border: 0;
+    color: var(--paper);
+    font: 400 16px var(--font-text);
+    padding: 0 0 0 16px;
+    outline: none;
+
+    &::placeholder {
+      color: #8f88a3;
+    }
+  }
+
+  .btn {
+    height: 46px;
+  }
+}
+
+.notify-msg {
+  min-height: 1.5em;
+  margin: 8px 0 0 16px;
+  font-size: 14px;
+  color: var(--mute);
+
+  &[data-state="error"] {
+    color: #ff9cc1;
+  }
+}
+
+// Estática de sintonia (ecrã inteiro) ---------------------------------------
+.tune-static {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0;
+  mix-blend-mode: screen;
+  image-rendering: pixelated;
+  transition: opacity 140ms ease;
+
+  &[data-on="true"] {
+    opacity: 0.32;
+  }
+}
+
+// faixa de interferência: uma banda horizontal que atravessa o ecrã ao sintonizar
+.tune-tear {
+  position: fixed;
+  inset: 0 0 auto;
+  height: 18vh;
+  z-index: 61;
+  pointer-events: none;
+  opacity: 0;
+  background:
+    repeating-linear-gradient(to bottom, rgb(224 36 122 / 0.5) 0 2px, transparent 2px 5px),
+    linear-gradient(to bottom, transparent, rgb(91 63 214 / 0.35), transparent);
+  mix-blend-mode: screen;
+
+  &[data-on="true"] {
+    animation: tear 420ms var(--ease-out);
+  }
+}
+
+@keyframes tear {
+  0% {
+    opacity: 0.9;
+    transform: translateY(-20vh) skewX(-8deg);
+  }
+  60% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(100vh) skewX(4deg);
+  }
+}
+
+// Assinatura de voz -----------------------------------------------------------
+.voiceprint {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 28px;
+
+  span {
+    width: 3px;
+    height: calc(var(--h) * 100%);
+    background: var(--line-2);
+    border-radius: 2px;
+    transition: background-color 300ms ease;
+  }
+
+  &[data-live="true"] span {
+    background: var(--magenta);
+    animation: talk 0.8s var(--d) ease-in-out infinite alternate;
+  }
+}
+
+@keyframes talk {
+  from {
+    transform: scaleY(0.3);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .voiceprint[data-live="true"] span {
+    animation: none;
+  }
+}

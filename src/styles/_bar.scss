@@ -1,0 +1,367 @@
+// Barra de emissão: logótipo, dial de frequências, sinal "No ar", som, ingressos.
+.bar {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 50;
+  height: var(--bar-h);
+  background: linear-gradient(to bottom, rgb(11 9 18 / 0.85), rgb(11 9 18 / 0));
+  border-bottom: 1px solid transparent;
+  transition:
+    background-color 300ms ease,
+    border-color 300ms ease;
+
+  &[data-scrolled="true"] {
+    background: rgb(11 9 18 / 0.94);
+    border-bottom-color: var(--line);
+  }
+}
+
+.bar-inner {
+  height: 100%;
+  width: min(100% - 2 * var(--gutter), 1600px);
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 28px;
+}
+
+.bar-logo {
+  display: block;
+  flex: none;
+}
+
+.bar-logo img {
+  height: 30px;
+  width: auto;
+  max-width: none;
+}
+
+.dial {
+  position: relative;
+  justify-self: center;
+  width: 100%;
+  max-width: 620px;
+  height: 44px;
+
+  ul {
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 22px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    position: absolute;
+    top: 0;
+    transform: translateX(-50%);
+  }
+
+  a {
+    display: block;
+    padding: 4px 2px;
+    font: 500 11px/1 var(--font-mono);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--mute);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 200ms ease;
+
+    &[aria-current] {
+      color: var(--paper);
+    }
+  }
+}
+
+.dial-ruler {
+  position: absolute;
+  inset: auto 0 6px 0;
+  height: 14px;
+  background:
+    repeating-linear-gradient(to right, var(--line-2) 0 1px, transparent 1px calc(100% / 20.5)) bottom / 100% 14px no-repeat,
+    repeating-linear-gradient(to right, var(--line) 0 1px, transparent 1px calc(100% / 102.5)) bottom / 100% 7px no-repeat;
+}
+
+.dial-needle {
+  position: absolute;
+  inset: -24px 0 -4px 0;
+  transition: transform 700ms var(--ease-io);
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: -1px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    border-radius: 2px;
+    background: var(--magenta);
+  }
+}
+
+.dial-needle[data-pulse="true"]::before {
+  animation: needle-pulse 520ms var(--ease-out);
+}
+
+@keyframes needle-pulse {
+  0% {
+    transform: scaleX(3);
+    background: #fff;
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+.dial-readout {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  height: 38px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  cursor: pointer;
+  justify-self: end;
+  transition:
+    border-color 200ms ease,
+    transform 160ms var(--ease-out);
+
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+.dial-lamp {
+  display: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--magenta);
+}
+.dial-freq {
+  font-size: 15px;
+  font-weight: 600;
+}
+.dial-unit {
+  font-size: 10px;
+  color: var(--mute);
+}
+.dial-name {
+  font-size: 12px;
+  color: var(--mute);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-left: 4px;
+}
+
+.bar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.on-air {
+  font: 600 11px/1 var(--font-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--magenta);
+  padding: 6px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+
+  @media (prefers-reduced-motion: no-preference) {
+    animation: on-air 2.6s ease-in-out infinite;
+  }
+}
+
+@keyframes on-air {
+  50% {
+    background: #8e1550;
+  }
+}
+
+.bar-sound {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 38px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--mute);
+  font: 500 13px/1 var(--font-text);
+  cursor: pointer;
+  transition:
+    color 200ms ease,
+    border-color 200ms ease,
+    transform 160ms var(--ease-out);
+
+  &:active {
+    transform: scale(0.96);
+  }
+
+  &[aria-pressed="true"] {
+    color: var(--paper);
+    border-color: var(--magenta);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .dial-readout:hover {
+    border-color: var(--magenta);
+  }
+  .dial a:hover {
+    color: var(--paper);
+  }
+  .bar-sound:hover {
+    color: var(--paper);
+  }
+}
+
+// Sem espaço para o dial com nomes: fica só a leitura da frequência.
+@media (max-width: 1180px) {
+  .dial ul {
+    display: none;
+  }
+  .dial {
+    height: 24px;
+    max-width: 360px;
+  }
+  .dial-needle {
+    inset: -6px 0 -4px 0;
+  }
+  .dial-readout {
+    display: inline-flex;
+  }
+}
+
+@media (max-width: 760px) {
+  .bar-inner {
+    grid-template-columns: auto 1fr auto;
+    gap: 14px;
+  }
+  .dial {
+    display: none;
+  }
+  .bar-inner > .dial-readout {
+    justify-self: end;
+  }
+  .bar-sound span {
+    display: none;
+  }
+  .bar-sound {
+    width: 38px;
+    padding: 0;
+    justify-content: center;
+  }
+  .bar-logo img {
+    height: 24px;
+  }
+}
+
+@media (max-width: 520px) {
+  .on-air {
+    display: none;
+  }
+  .dial-lamp {
+    display: block;
+  }
+  .dial-readout {
+    padding: 0 12px;
+  }
+  .dial-unit {
+    display: none;
+  }
+}
+
+@media (max-width: 430px) {
+  .dial-name {
+    display: none;
+  }
+}
+
+// Lista de estações em ecrã inteiro --------------------------------------------
+.tuner-sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 88px var(--gutter) 40px;
+  background:
+    repeating-linear-gradient(to bottom, rgb(243 238 246 / 0.03) 0 1px, transparent 1px 4px),
+    var(--ink);
+  overflow-y: auto;
+
+  ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--line);
+  }
+
+  li {
+    border-bottom: 1px solid var(--line);
+
+    @media (prefers-reduced-motion: no-preference) {
+      animation: sheet-in 420ms var(--ease-out) both;
+      animation-delay: calc(var(--i) * 40ms);
+    }
+  }
+
+  a {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+    padding: 14px 0;
+    color: var(--faint);
+    text-decoration: none;
+
+    &[aria-current] {
+      color: var(--paper);
+
+      .tuner-freq {
+        color: var(--magenta);
+      }
+    }
+  }
+}
+
+.tuner-freq {
+  min-width: 5ch;
+  font: 500 15px/1 var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--mute);
+}
+
+.tuner-name {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 9vw, 3.4rem);
+  font-variation-settings: "wdth" 110, "wght" 700;
+  line-height: 1;
+}
+
+.tuner-close {
+  position: absolute;
+  top: 10px;
+  right: var(--gutter);
+}
+
+@keyframes sheet-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}

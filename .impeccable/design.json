@@ -1,0 +1,21 @@
+{
+  "name": "Hype CX 2027, Em Directo",
+  "source": "DESIGN.md",
+  "motion": {
+    "easeOut": "cubic-bezier(0.23, 1, 0.32, 1)",
+    "easeInOut": "cubic-bezier(0.77, 0, 0.175, 1)",
+    "tuningStatic": { "opacity": 0.32, "durationMs": 340, "blend": "screen" },
+    "interferenceBand": { "durationMs": 420 },
+    "needleGlideMs": 700,
+    "tuneInPhoto": { "durationMs": 800, "blurFromPx": 14, "delayMs": 160 },
+    "pressScale": 0.97,
+    "reducedMotion": "static wave frame, no static, no transcript reveal, no voiceprint animation"
+  },
+  "focusRing": "2px solid #ff5ca2, offset 3px (white on the magenta tickets block)",
+  "selection": "background #e0247a, text #ffffff",
+  "duotoneFilter": {
+    "id": "duo",
+    "stops": ["#0b0912", "#5c40d6", "#e0247a", "#ffdbed"]
+  },
+  "zIndex": { "bar": 50, "tuneStatic": 60, "tuneTear": 61, "tunerSheet": 70, "skip": 100 }
+}

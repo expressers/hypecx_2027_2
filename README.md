@@ -1,35 +1,31 @@
-# Hype CX 2027 — Landing page (proposta 2)
+# Hype CX 2027 · Proposta 2 «Em Directo»
 
-Landing page da próxima edição da Hype CX (Targeting).
+Landing page da 3ª edição do Hype CX (Targeting), na visão da Expressers: o evento como uma
+emissão de rádio em directo da voz do cliente. Cada secção é uma estação no dial FM, a mudança
+de estação passa por estática, o nome HYPE CX respira com o sinal e os oradores sintonizam a
+partir do ruído.
 
 ## Stack
 
-- [Vite](https://vite.dev) + React + TypeScript
-- [Bun](https://bun.sh) como gestor de pacotes e runtime dos scripts
-- Tailwind CSS v4 (via `@tailwindcss/postcss`)
-- [shadcn/ui](https://ui.shadcn.com) (componentes em `src/components/ui`)
-- Sass — a folha de raiz é `src/index.scss`
-
-## Comandos
+Vite, React 19, TypeScript, Bun, Tailwind v4 (via PostCSS) e Sass. Fontes self-hosted
+(Fontsource): Anybody (eixo de largura animado), Geist e Geist Mono.
 
 ```bash
-bun install        # instalar dependências
-bun run dev        # servidor de desenvolvimento
-bun run build      # build de produção (dist/)
-bun run preview    # pré-visualizar o build
-bun run lint       # oxlint
-bunx shadcn@latest add <componente>   # adicionar componentes shadcn
+bun install
+bun run dev      # desenvolvimento
+bun run build    # produção em dist/
 ```
 
-## Notas sobre Sass + Tailwind
+## Estrutura
 
-O `@tailwindcss/vite` só processa ficheiros `.css`, por isso o Tailwind corre
-via PostCSS (`postcss.config.js`), depois de o Sass compilar `src/index.scss`.
+- `src/content.ts`: todo o conteúdo (edição de 2026 como referência; 2027 sem data, local nem preços).
+- `src/lib/signal.ts`: relógio único do sinal (osciloscópio, título, som opcional por WebAudio).
+- `src/sections/`: Hero, Porquê, Vozes, Alinhamento, Arquivo, Patrocínio, Ingressos, Fim da emissão.
+- `src/styles/`: tokens e estilos Sass.
+- `public/media/`: fotografias, retratos e logótipos reais da edição de 2026.
+- `PRODUCT.md`, `DESIGN.md`: contexto do produto e sistema visual.
 
-Imports de pacotes CSS dentro do `.scss` têm de ficar como imports CSS puros,
-senão o Sass tenta compilá-los:
+## Por confirmar com a Targeting
 
-- `@import "pacote/ficheiro.css";` (termina em `.css`), ou
-- `@import url("pacote");`
-
-As fontes (fontsource) são importadas em `src/main.tsx`.
+Data, local e preços da 3ª edição, e os oradores de 2027. As acções "Avisem-me",
+"Pedir proposta" e "Seja patrocinador" abrem um email para hypecx@targeting.ao.

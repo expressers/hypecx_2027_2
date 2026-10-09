@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Impeccable: capturas de revisão (locais)
+.impeccable/review/
+.impeccable/mocks/
+.impeccable/*.local.json
