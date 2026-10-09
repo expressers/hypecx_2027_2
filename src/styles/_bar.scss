@@ -18,7 +18,7 @@
 
 .bar-inner {
   height: 100%;
-  width: min(100% - 2 * var(--gutter), 1600px);
+  width: min(100% - 2 * var(--gutter), 1400px);
   margin-inline: auto;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto auto;

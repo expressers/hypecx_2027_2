@@ -14,7 +14,7 @@ colors:
 typography:
   wordmark:
     fontFamily: "Anybody Variable, Arial Narrow, sans-serif"
-    fontSize: "clamp(4.4rem, 19.5vw, 22rem)"
+    fontSize: "clamp(4.4rem, 19.5vw, 16.5rem)"
     fontWeight: 800
     lineHeight: 0.8
     letterSpacing: "-0.02em"

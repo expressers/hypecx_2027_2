@@ -66,7 +66,7 @@
   margin: 0;
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(4.4rem, 19.5vw, 22rem);
+  font-size: clamp(4.4rem, 19.5vw, 16.5rem);
   line-height: 0.8;
   letter-spacing: -0.02em;
   color: var(--paper);
@@ -85,6 +85,7 @@
 
 .mark-gap {
   display: inline-block;
+  flex: none;
   width: 0.2em;
 }
 
