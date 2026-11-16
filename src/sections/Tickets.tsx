@@ -10,7 +10,7 @@ export function Tickets() {
     <section id="ingressos" className="tickets" aria-labelledby="ingressos-title">
       <div className="shell">
         <h2 id="ingressos-title" className="tickets-title">
-          Reserve a sua frequência.
+          Reserve o seu ingresso
         </h2>
         <p className="lede tickets-lede">
           Os preços da 3ª&nbsp;edição são anunciados em breve. Escolha o seu ingresso e avisamos primeiro.

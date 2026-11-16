@@ -48,9 +48,7 @@ export default function App() {
         <Voices />
         <SignalRule to="alinhamento" />
         <Rundown />
-        <SignalRule to="arquivo" />
         <Archive />
-        <SignalRule to="patrocinio" />
         <Sponsors />
         <Tickets />
       </main>

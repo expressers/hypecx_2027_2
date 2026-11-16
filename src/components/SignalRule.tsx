@@ -73,9 +73,11 @@ export function SignalRule({ to }: { to: string }) {
   return (
     <div className="signal-rule shell" aria-hidden="true">
       <canvas ref={ref} />
-      <span>
-        {station.freq.toFixed(1)} <small>FM</small>
-      </span>
+      {station.showFreq !== false && (
+        <span>
+          {station.freq.toFixed(1)} <small>FM</small>
+        </span>
+      )}
     </div>
   )
 }

@@ -1,29 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
-import { Volume2, VolumeX, X } from 'lucide-react'
+import { X } from 'lucide-react'
 import { stations } from '@/content'
 import { goTo, useActiveStation } from '@/lib/stations'
-import { onTune, sound } from '@/lib/signal'
+import { onTune } from '@/lib/signal'
 
 const MIN = 87.5
 const MAX = 108
 const pos = (f: number) => ((f - MIN) / (MAX - MIN)) * 100
-
-function SoundToggle() {
-  const [on, setOn] = useState(sound.on)
-  useEffect(() => sound.subscribe(setOn), [])
-  return (
-    <button
-      type="button"
-      className="bar-sound"
-      aria-pressed={on}
-      onClick={() => sound.toggle()}
-      title={on ? 'Desligar o som da emissão' : 'Ligar o som da emissão'}
-    >
-      {on ? <Volume2 aria-hidden size={16} strokeWidth={1.75} /> : <VolumeX aria-hidden size={16} strokeWidth={1.75} />}
-      <span>{on ? 'Som ligado' : 'Som'}</span>
-    </button>
-  )
-}
 
 /** Lista de estações em ecrã inteiro (telemóvel e ecrãs estreitos). */
 function TunerSheet({ activeId, onClose }: { activeId: string; onClose: () => void }) {
@@ -71,10 +54,11 @@ function TunerSheet({ activeId, onClose }: { activeId: string; onClose: () => vo
               onClick={(e) => {
                 e.preventDefault()
                 onClose()
+                history.replaceState(null, '', `#${s.id}`)
                 requestAnimationFrame(() => goTo(s.id))
               }}
             >
-              <span className="tuner-freq">{s.freq.toFixed(1)}</span>
+              {s.showFreq !== false && <span className="tuner-freq">{s.freq.toFixed(1)}</span>}
               <span className="tuner-name">{s.label}</span>
             </a>
           </li>
@@ -144,21 +128,23 @@ export function BroadcastBar() {
           className="dial-readout"
           aria-haspopup="dialog"
           aria-expanded={sheet}
+          aria-label={`Secção actual: ${active.label}${
+            active.showFreq !== false ? `, ${active.freq.toFixed(1)} FM` : ''
+          }. Escolher secção`}
           onClick={() => setSheet(true)}
           title="Escolher secção"
         >
           <span className="dial-lamp" aria-hidden="true" />
-          <span className="sr-only">Secção actual: </span>
-          <span className="dial-freq">{active.freq.toFixed(1)}</span>
-          <span className="dial-unit">FM</span>
+          {active.showFreq !== false && (
+            <>
+              <span className="dial-freq">{active.freq.toFixed(1)}</span>
+              <span className="dial-unit">FM</span>
+            </>
+          )}
           <span className="dial-name">{active.label}</span>
         </button>
 
         <div className="bar-actions">
-          <span className="on-air" role="img" aria-label="Em directo">
-            No ar
-          </span>
-          <SoundToggle />
           <a href="#ingressos" onClick={jump('ingressos')} className="btn btn-signal btn-sm">
             Ingressos
           </a>

@@ -32,7 +32,7 @@ export function Sponsors() {
     <section id="patrocinio" className="sponsors" aria-labelledby="patrocinio-title">
       <div className="shell">
         <h2 id="patrocinio-title" className="sponsors-title">
-          A emissão de 2026 foi possível graças a
+          O Hype CX 2026 foi possível graças às seguintes marcas:
         </h2>
         <ul ref={grid} className="sponsor-grid" data-lit="false">
           {partners.map((p, i) => {
@@ -52,9 +52,8 @@ export function Sponsors() {
           })}
         </ul>
         <div className="sponsor-cta">
-          <p className="sponsor-pitch">A sua marca no ar em 2027, perante quem decide a experiência do cliente em Angola.</p>
-          <a className="btn btn-ghost" href={links.sponsor}>
-            Seja patrocinador
+          <a className="btn btn-signal" href={links.sponsor}>
+            Patrocinar o Hype CX 2027
           </a>
         </div>
       </div>

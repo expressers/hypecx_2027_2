@@ -93,21 +93,78 @@
   position: relative;
   z-index: 2;
   display: grid;
-  grid-template-columns: minmax(0, 540px) 1fr auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: end;
   gap: 32px;
 }
 
 .hero-lede {
-  margin: 0 0 22px;
-  max-width: 32ch;
-  font-size: clamp(1.08rem, 1.45vw, 1.35rem);
-  line-height: 1.4;
+  margin: 0;
+  max-width: 30ch;
+  font-family: var(--font-display);
+  font-variation-settings: "wdth" 96, "wght" 540;
+  font-size: clamp(1.45rem, 2.6vw, 2.35rem);
+  line-height: 1.12;
+  letter-spacing: -0.012em;
+  color: var(--paper);
   text-wrap: balance;
 }
 
+// Contagem para a 3ª edição ------------------------------------------------
+.countdown {
+  margin-top: clamp(22px, 3.6vh, 36px);
+}
+
+.countdown-label {
+  margin: 0 0 12px;
+  font: 500 11px/1.4 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mute);
+
+  strong {
+    color: var(--paper);
+    font-weight: 500;
+  }
+}
+
+.countdown-list {
+  display: flex;
+  gap: clamp(10px, 2.2vw, 32px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-left: clamp(8px, 1.2vw, 16px);
+    border-left: 1px solid var(--line);
+  }
+
+  li:first-child {
+    padding-left: 0;
+    border-left: 0;
+  }
+}
+
+.countdown-value {
+  font: 600 clamp(1.5rem, 3.4vw, 2.6rem) / 1 var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.04em;
+  color: var(--paper);
+}
+
+.countdown-unit {
+  font: 500 10px/1 var(--font-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+
 .hero-side {
-  grid-column: 3;
+  grid-column: 2;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -183,11 +240,14 @@
 @media (max-width: 960px) {
   .hero-foot {
     grid-template-columns: minmax(0, 1fr);
-    gap: 28px;
+    gap: 26px;
+  }
+  .hero-offer {
+    grid-row: 1;
   }
   .hero-side {
     grid-column: 1;
-    grid-row: 1;
+    grid-row: 2;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
@@ -205,9 +265,13 @@
   .hero-side {
     flex-direction: column;
     align-items: flex-start;
-    gap: 18px;
+    gap: 14px;
   }
   .hero-year {
-    font-size: 16vw;
+    font-size: 13vw;
+  }
+  .replay-thumb {
+    width: 76px;
+    height: 48px;
   }
 }

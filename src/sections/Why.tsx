@@ -1,14 +1,10 @@
-import { reasons, transcript } from '@/content'
+import { about, transcript } from '@/content'
 
 export function Why() {
   let i = 0
   return (
     <section id="porque" className="why" aria-labelledby="porque-title">
-      <div className="shell why-grid">
-        <p className="why-margin" aria-hidden="true">
-          <span>Transcrição</span>
-        </p>
-
+      <div className="shell">
         <h2 id="porque-title" className="transcript">
           {transcript.map((line, li) => (
             <span key={li} className="transcript-line" data-accent={li === 1}>
@@ -20,20 +16,17 @@ export function Why() {
             </span>
           ))}
         </h2>
-      </div>
 
-      <div className="shell">
-        <ul className="reasons">
-          {reasons.map((r) => (
-            <li key={r.word} className="reason">
-              <span className="reason-word">{r.word}</span>
-              <p className="reason-text">{r.text}</p>
-            </li>
+        <div className="why-body">
+          {about.map((paragraph, index) => (
+            <p key={index} className={index === 0 ? 'why-body-lead' : undefined}>
+              {paragraph}
+            </p>
           ))}
-        </ul>
+        </div>
 
         <p className="why-close">
-          Em 2026 foram <strong>10 oradores</strong>, <strong>12 marcas parceiras</strong> e um tema que ficou:{' '}
+          Em 2026 foram <strong>15 oradores</strong>, <strong>12 marcas parceiras</strong> e um tema que ficou:{' '}
           <em>Quem entende, lidera.</em>
         </p>
       </div>

@@ -25,7 +25,7 @@ export function SignOff() {
         <h2 id="signoff-title" className="signoff-title">
           Até 2027.
         </h2>
-        <p className="signoff-sub">Hype CX, 3ª&nbsp;edição. Luanda, data a anunciar.</p>
+        <p className="signoff-sub">Hype CX, 3ª&nbsp;edição. Luanda, 24 de Abril de 2027.</p>
 
         <div className="footer-grid">
           <div className="footer-brand">
@@ -72,7 +72,7 @@ export function SignOff() {
               {stations.map((s) => (
                 <li key={s.id}>
                   <a href={`#${s.id}`}>
-                    <span>{s.freq.toFixed(1)}</span> {s.label}
+                    {s.showFreq !== false && <span>{s.freq.toFixed(1)}</span>} {s.label}
                   </a>
                 </li>
               ))}

@@ -1,4 +1,4 @@
-// Barra de emissão: logótipo, dial de frequências, sinal "No ar", som, ingressos.
+// Barra de emissão: logótipo, dial de frequências e ingressos.
 .bar {
   position: fixed;
   inset: 0 0 auto;
@@ -21,7 +21,7 @@
   width: min(100% - 2 * var(--gutter), 1400px);
   margin-inline: auto;
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto auto;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
   gap: 28px;
 }
@@ -169,62 +169,11 @@
   gap: 10px;
 }
 
-.on-air {
-  font: 600 11px/1 var(--font-mono);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #fff;
-  background: var(--magenta);
-  padding: 6px 8px;
-  border-radius: 4px;
-  white-space: nowrap;
-
-  @media (prefers-reduced-motion: no-preference) {
-    animation: on-air 2.6s ease-in-out infinite;
-  }
-}
-
-@keyframes on-air {
-  50% {
-    background: #8e1550;
-  }
-}
-
-.bar-sound {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  height: 38px;
-  padding: 0 12px;
-  border-radius: 999px;
-  border: 1px solid var(--line);
-  background: transparent;
-  color: var(--mute);
-  font: 500 13px/1 var(--font-text);
-  cursor: pointer;
-  transition:
-    color 200ms ease,
-    border-color 200ms ease,
-    transform 160ms var(--ease-out);
-
-  &:active {
-    transform: scale(0.96);
-  }
-
-  &[aria-pressed="true"] {
-    color: var(--paper);
-    border-color: var(--magenta);
-  }
-}
-
 @media (hover: hover) and (pointer: fine) {
   .dial-readout:hover {
     border-color: var(--magenta);
   }
   .dial a:hover {
-    color: var(--paper);
-  }
-  .bar-sound:hover {
     color: var(--paper);
   }
 }
@@ -257,23 +206,12 @@
   .bar-inner > .dial-readout {
     justify-self: end;
   }
-  .bar-sound span {
-    display: none;
-  }
-  .bar-sound {
-    width: 38px;
-    padding: 0;
-    justify-content: center;
-  }
   .bar-logo img {
     height: 24px;
   }
 }
 
 @media (max-width: 520px) {
-  .on-air {
-    display: none;
-  }
   .dial-lamp {
     display: block;
   }
@@ -333,7 +271,7 @@
       color: var(--paper);
 
       .tuner-freq {
-        color: var(--magenta);
+        color: var(--magenta-hi);
       }
     }
   }

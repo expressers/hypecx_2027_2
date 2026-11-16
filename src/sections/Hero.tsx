@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { Play } from 'lucide-react'
 import { event } from '@/content'
-import { NotifyForm } from '@/components/NotifyForm'
+import { Countdown } from '@/components/Countdown'
 import { paintNoise } from '@/components/Static'
 import { excite, motionOK, onTick, surge, wave } from '@/lib/signal'
 
@@ -176,9 +176,9 @@ export function Hero() {
         <div className="hero-foot">
           <div className="hero-offer">
             <p className="hero-lede">
-              O maior evento de Experiência do Cliente em Angola volta ao ar. 3ª&nbsp;edição, Luanda, data a anunciar.
+              O evento de referência em Customer Experience, Estratégias de Negócios, Marketing e Vendas em Angola.
             </p>
-            <NotifyForm />
+            <Countdown />
           </div>
 
           <div className="hero-side">
@@ -191,8 +191,8 @@ export function Hero() {
                 <Play aria-hidden size={18} strokeWidth={2} fill="currentColor" />
               </span>
               <span className="replay-text">
-                Ver o vídeo de 2026
-                <small>Aftermovie no YouTube</small>
+                Ver vídeo de 2026
+                <small>Vídeo oficial no YouTube</small>
               </span>
             </a>
           </div>

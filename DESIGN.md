@@ -7,8 +7,9 @@ colors:
   console-panel: "#17131f"
   paper: "#f3eef6"
   muted-paper: "#aaa3b9"
-  signal-magenta: "#e0247a"
+  signal-magenta: "#d61e71"
   signal-magenta-deep: "#b81a62"
+  signal-magenta-light: "#ff5ca2"
   carrier-violet: "#5b3fd6"
   carrier-violet-light: "#a493ff"
 typography:
@@ -63,11 +64,9 @@ components:
     textColor: "{colors.paper}"
     rounded: "{rounded.control}"
     height: "48px"
-  on-air-lamp:
+  dial-lamp:
     backgroundColor: "{colors.signal-magenta}"
-    textColor: "#ffffff"
     rounded: "{rounded.lamp}"
-    typography: "{typography.label}"
 ---
 
 # Design System: Hype CX 2027, Em Directo
@@ -81,8 +80,8 @@ The page is a radio broadcast of the customer's voice. The consumer speaks; the 
 The display face is a variable font whose width axis is driven by the signal, so the name itself breathes with the voice. Photography stays out of tune (a magenta/violet duotone) until it is in view, then resolves to full colour out of noise.
 
 **Key Characteristics:**
-- One live signal: magenta is the "on air" state, never decoration.
-- Type as voice: Anybody's width axis carries loudness; Geist carries reading; Geist Mono carries only frequencies and timecodes.
+- One live signal: magenta is the live state, never decoration.
+- Type as voice: Anybody's width axis carries loudness; Geist carries reading; Geist Mono carries only frequencies, timecodes and the countdown.
 - Static as transition material: station changes, speaker changes and the first viewport all pass through noise.
 - Real material only: 2026 photos, speakers, partners and agenda. 2027 facts are never invented.
 
@@ -91,7 +90,7 @@ The display face is a variable font whose width axis is driven by the signal, so
 A dark studio with one hot signal and one cool carrier.
 
 ### Primary
-- **Signal Magenta** (#e0247a): live state (ON AIR lamp, dial needle, active rundown segment, live voiceprint), primary actions, the oscilloscope line. Also the one full-colour block on the page: the tickets section.
+- **Signal Magenta** (#d61e71): live state (dial lamp, dial needle, live voiceprint), primary actions, the oscilloscope line. Also the one full-colour block on the page: the tickets section. The value is two steps deeper than the 2026 brand magenta so white body text keeps 4.5:1 on it. Small magenta text on ink (the closing stat, the active frequency in the station sheet) uses **Signal Magenta Light** (#ff5ca2), the same pink as the focus ring.
 
 ### Secondary
 - **Carrier Violet** (#5b3fd6): the carrier waves behind the signal, duotone shadows, one archive quote card. **Light Violet** (#a493ff) is its readable form for small text on ink (rundown segment type).
@@ -101,7 +100,7 @@ A dark studio with one hot signal and one cool carrier.
 - **Paper** (#f3eef6): primary text. **Muted Paper** (#aaa3b9): secondary text (≥7:1 on ink). Hairlines are paper at 12% and 24% alpha.
 
 ### Named Rules
-**The On Air Rule.** Magenta means live. If something is magenta, it is either the signal, the current state, or the action. Never a decorative tint.
+**The Live Signal Rule.** Magenta means live. If something is magenta, it is either the signal, the current state, or the action. Never a decorative tint.
 
 **The Out of Tune Rule.** A photograph enters as a magenta/violet duotone (SVG filter `#duo`) and only shows its real colour once tuned in.
 
@@ -109,7 +108,7 @@ A dark studio with one hot signal and one cool carrier.
 
 **Display Font:** Anybody Variable (width 50 to 150, weight 100 to 900), self-hosted via Fontsource.
 **Body Font:** Geist Variable.
-**Label/Mono Font:** Geist Mono Variable, for frequencies, timecodes, ON AIR and section metadata only.
+**Label/Mono Font:** Geist Mono Variable, for frequencies, timecodes, the countdown and section metadata only.
 
 **Character:** a broadcast-graphics display face whose width stretches with loudness, paired with a calm, neutral reading face.
 
@@ -125,7 +124,7 @@ A dark studio with one hot signal and one cool carrier.
 
 ## Layout
 
-Single column of stations inside a 1400px shell with a fluid gutter (16 to 56px). A fixed 64px broadcast bar carries the logo, the FM dial with station labels (above 1180px), a frequency readout button (below 1180px, opens a full-screen station sheet), the ON AIR lamp, the sound toggle and the tickets action. Each section is separated by a live signal rule that ends in the next station's frequency. Layout families never repeat: canvas hero, transcript, list plus sticky portrait, timeline rundown, horizontal reel, logo grid, ticket bands, sign-off. Below 900px every multi-column layout collapses to one column; the speakers become a snap carousel.
+Single column of stations inside a 1400px shell with a fluid gutter (16 to 56px). A fixed 64px broadcast bar carries the logo, the FM dial with station labels (above 1180px), a frequency readout button (below 1180px, opens a full-screen station sheet) and the tickets action. The hero pairs the wordmark with the positioning line and a countdown to 24 April 2027. Hero, Sobre, Oradores and Programa are separated by a live signal rule that ends in the next station's frequency; Sobre deliberately carries no printed frequency. Arquivo and Patrocínio follow as sub-blocks of the same broadcast. Layout families never repeat: canvas hero, transcript plus about, list plus sticky portrait, agenda placeholder band, horizontal reel, logo grid, ticket bands, sign-off. Below 900px every multi-column layout collapses to one column; the speakers become a snap carousel.
 
 ## Elevation & Depth
 
@@ -133,16 +132,17 @@ Flat. No shadows. Depth comes from light and signal: scanlines over photography,
 
 ## Shapes
 
-Three radii: 4px for lamps and small status tags, 14px for every media frame and quote card, full pill for every control (buttons, inputs, chips, sound toggle). Lines are 1px hairlines; the oscilloscope is 1 to 2.5px strokes.
+Three radii: 4px for lamps and small status tags, 14px for every media frame and quote card, full pill for every control (buttons, inputs, chips). Lines are 1px hairlines; the oscilloscope is 1 to 2.5px strokes.
 
 ## Components
 
 - **Broadcast bar**: transparent over the hero, solid ink with a hairline once scrolled. The dial needle glides with `cubic-bezier(0.77, 0, 0.175, 1)` and pulses white on each tuning.
 - **Buttons**: signal (magenta fill, white text), ghost (hairline, paper text, magenta border on hover). Press scales to 0.97. On the magenta tickets block, signal buttons become ink and ghost buttons fill white on hover.
-- **Notify form ("Avisem-me")**: pill well with email field and signal button; composes an email to hypecx@targeting.ao; inline error and status messages.
+- **Countdown**: four mono values (days, hours, minutes, seconds) separated by hairlines, under the hero positioning line. It ticks once a second and names 24 April 2027 as its target.
+- **Notify form ("Avisem-me")**: pill well with email field and signal button, kept inside the ticket rows; composes an email to comercial@targeting.ao; inline error and status messages.
 - **Voice row**: name (wdth 88 → 122 when current), role and company, a seeded voiceprint that animates when live. Current row uses `aria-current`.
 - **Tuned frame**: stacked duotone and colour layers; changing voice flashes noise for 300ms and resolves the colour layer from blur.
-- **Rundown segment**: mono timecode, segment type in light violet, ON AIR tag and magenta node when centred; speaker chips tune the Voices section.
+- **Programa placeholder**: the agenda is not public, so the section pairs a sticky heading with a hairline band that reads "Em breve" and names the edition. No invented times or sessions.
 - **Signal rule**: 56px canvas, signal grows from flat at the left into the next station's frequency.
 
 ## Do's and Don'ts

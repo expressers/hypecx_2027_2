@@ -6,7 +6,7 @@ type Props = { ticket?: string; label?: string; compact?: boolean }
 
 /**
  * Acção principal: deixar o email para ser avisado. Sem backend, compõe a
- * mensagem para hypecx@targeting.ao no programa de email do visitante.
+ * mensagem para comercial@targeting.ao no programa de email do visitante.
  */
 export function NotifyForm({ ticket, label = 'Seja avisado quando abrirem os ingressos', compact }: Props) {
   const id = useId()

@@ -33,7 +33,7 @@ export function Archive() {
         <div className="archive-controls">
           <a className="btn btn-signal" href={event.aftermovie} target="_blank" rel="noreferrer">
             <Play aria-hidden size={16} strokeWidth={2} fill="currentColor" />
-            Ver o vídeo de 2026
+            Ver vídeo de 2026
           </a>
           <button type="button" className="icon-btn" onClick={() => nudge(-1)} aria-label="Recuar no arquivo">
             <ArrowLeft aria-hidden size={18} strokeWidth={1.75} />

@@ -58,7 +58,6 @@ function step(t: number, dt: number) {
   voice.level += (voice.target - voice.level) * Math.min(1, k * dt)
   voice.energy *= Math.exp(-2.2 * dt)
   voice.boost *= Math.exp(-1.4 * dt)
-  sound.follow(level())
 }
 
 /** 0..1: intensidade actual do sinal (voz + gesto do visitante). */
@@ -106,100 +105,6 @@ export function onTune(fn: TuneListener) {
 
 export function tune(stationId: string) {
   surge(0.45)
-  sound.burst()
   tuneListeners.forEach((fn) => fn(stationId))
 }
 
-// ---------------------------------------------------------------- som (opcional)
-// Desligado por defeito. Chiado de rádio baixo + rajada de estática ao sintonizar.
-type SoundListener = (on: boolean) => void
-
-export const sound = (() => {
-  let ctx: AudioContext | null = null
-  let hissGain: GainNode | null = null
-  let master: GainNode | null = null
-  let noiseBuffer: AudioBuffer | null = null
-  let on = false
-  const listeners = new Set<SoundListener>()
-
-  function makeNoise(c: AudioContext) {
-    const len = c.sampleRate * 2
-    const buf = c.createBuffer(1, len, c.sampleRate)
-    const d = buf.getChannelData(0)
-    let b = 0
-    for (let i = 0; i < len; i++) {
-      const w = Math.random() * 2 - 1
-      b = 0.97 * b + 0.03 * w // ligeiramente "rosa"
-      d[i] = w * 0.35 + b * 2.2
-    }
-    return buf
-  }
-
-  function start() {
-    const Ctor = window.AudioContext ?? (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext
-    ctx = ctx ?? new Ctor()
-    void ctx.resume()
-    noiseBuffer = noiseBuffer ?? makeNoise(ctx)
-    master = ctx.createGain()
-    master.gain.value = 0
-    master.gain.setTargetAtTime(1, ctx.currentTime, 0.2)
-    master.connect(ctx.destination)
-
-    const src = ctx.createBufferSource()
-    src.buffer = noiseBuffer
-    src.loop = true
-    const band = ctx.createBiquadFilter()
-    band.type = 'bandpass'
-    band.frequency.value = 2400
-    band.Q.value = 0.6
-    hissGain = ctx.createGain()
-    hissGain.gain.value = 0.012
-    src.connect(band).connect(hissGain).connect(master)
-    src.start()
-  }
-
-  return {
-    get on() {
-      return on
-    },
-    toggle() {
-      on = !on
-      if (on) start()
-      else if (ctx && master) {
-        const m = master
-        m.gain.setTargetAtTime(0, ctx.currentTime, 0.08)
-        setTimeout(() => m.disconnect(), 400)
-        master = null
-        hissGain = null
-      }
-      listeners.forEach((fn) => fn(on))
-    },
-    subscribe(fn: SoundListener) {
-      listeners.add(fn)
-      return () => {
-        listeners.delete(fn)
-      }
-    },
-    follow(l: number) {
-      if (!on || !ctx || !hissGain) return
-      hissGain.gain.setTargetAtTime(0.008 + l * 0.018, ctx.currentTime, 0.1)
-    },
-    burst() {
-      if (!on || !ctx || !master || !noiseBuffer) return
-      const src = ctx.createBufferSource()
-      src.buffer = noiseBuffer
-      const band = ctx.createBiquadFilter()
-      band.type = 'bandpass'
-      band.Q.value = 1.4
-      band.frequency.setValueAtTime(900, ctx.currentTime)
-      band.frequency.exponentialRampToValueAtTime(4200, ctx.currentTime + 0.28)
-      const g = ctx.createGain()
-      g.gain.setValueAtTime(0.0001, ctx.currentTime)
-      g.gain.exponentialRampToValueAtTime(0.09, ctx.currentTime + 0.03)
-      g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.32)
-      src.connect(band).connect(g).connect(master)
-      src.start(ctx.currentTime, Math.random())
-      src.stop(ctx.currentTime + 0.4)
-    },
-  }
-})()

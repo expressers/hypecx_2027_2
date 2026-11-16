@@ -1,15 +1,17 @@
 // Conteúdo da proposta 2 (Hype CX 2027, "Em Directo").
 // Fonte: hypecx.targeting.ao (edição de 2026) e proposta 1.
-// Data, local e preços de 2027 ainda não são públicos: nunca inventar.
+// Data fixada a 24 de Abril de 2027; local, programa e preços ainda não são públicos: nunca inventar.
 
 export const event = {
-  email: 'hypecx@targeting.ao',
+  email: 'comercial@targeting.ao',
   phone: '+244 943 229 113',
   phoneHref: 'tel:+244943229113',
-  aftermovie: 'https://www.youtube.com/watch?v=6spHjoi4qKg',
+  aftermovie: 'https://www.youtube.com/watch?v=fz--5eaPb0M',
   linkedin: 'https://www.linkedin.com/company/hypecx/',
   instagram: 'https://www.instagram.com/hypecx.ao/',
-  youtube: 'https://www.youtube.com/watch?v=6spHjoi4qKg',
+  youtube: 'https://www.youtube.com/watch?v=fz--5eaPb0M',
+  dateLabel: '24 de Abril de 2027',
+  countdownTo: '2027-04-24T09:00:00+01:00',
 }
 
 const mail = (subject: string, body = '') =>
@@ -22,32 +24,29 @@ export const links = {
       `Olá equipa Hype CX,\n\nQuero ser avisado(a) quando abrirem os ingressos para a 3ª edição.\n\nEmail: ${email}\n`,
     ),
   corporate: mail('Proposta Corporate: Hype CX 2027', 'Olá equipa Hype CX,\n\nGostaríamos de receber uma proposta para a nossa equipa.\n\nEmpresa:\nNúmero de pessoas:\n'),
-  sponsor: mail('Patrocínio: Hype CX 2027', 'Olá equipa Hype CX,\n\nGostaríamos de saber mais sobre o patrocínio da 3ª edição.\n\nEmpresa:\n'),
+  sponsor: mail('Patrocinar o Hype CX 2027', 'Olá equipa Hype CX,\n\nGostaríamos de saber mais sobre o patrocínio da 3ª edição.\n\nEmpresa:\n'),
 }
 
-export type Station = { id: string; label: string; freq: number }
+export type Station = { id: string; label: string; freq: number; showFreq?: boolean }
 
 // Cada secção é uma estação no dial (FM 87.5 a 108).
 export const stations: Station[] = [
   { id: 'inicio', label: 'Início', freq: 88.1 },
-  { id: 'porque', label: 'Porquê', freq: 91.3 },
-  { id: 'vozes', label: 'Vozes', freq: 94.7 },
-  { id: 'alinhamento', label: 'Alinhamento', freq: 98.4 },
-  { id: 'arquivo', label: 'Arquivo', freq: 101.9 },
-  { id: 'patrocinio', label: 'Patrocínio', freq: 104.6 },
+  { id: 'porque', label: 'Sobre', freq: 91.3, showFreq: false },
+  { id: 'vozes', label: 'Oradores', freq: 94.7 },
+  { id: 'alinhamento', label: 'Programa', freq: 98.4 },
   { id: 'ingressos', label: 'Ingressos', freq: 107.5 },
 ]
 
 export const transcript = [
-  'Hoje, o consumidor está mais informado, mais exigente e mais vocal.',
-  'Mas ainda se sente pouco escutado.',
-  'As empresas que entenderem isso primeiro vão liderar o mercado.',
+  'Um evento com curadoria independente, densidade intelectual e ambição prática.',
+  'Um compromisso com a mudança real, feita com dados, decisões e execução. O Hype CX 2027 não é um evento para “falar de CX”.',
+  'É o ponto de viragem para começar a fazer CX. Com seriedade, escala e impacto.',
 ]
 
-export const reasons = [
-  { word: 'Medir', text: 'A maioria das empresas em Angola ainda não mede a experiência do cliente de forma sistemática.' },
-  { word: 'Escutar', text: 'O consumidor já tem canais de voz, mas sente que não é levado a sério.' },
-  { word: 'Diferenciar', text: 'A diferença entre marcas acontece cada vez menos no produto e cada vez mais na jornada.' },
+export const about = [
+  'O Hype CX é o maior evento sobre Customer Experience, Estratégias de Negócios, Marketing e Vendas em Angola.',
+  'Mais do que um espaço de discussão, o Hype CX é uma plataforma de transformação prática, um palco com densidade intelectual e curadoria rigorosa a nível do conteúdo, onde líderes empresariais e profissionais com vasta experiência partilham estratégias, dados e ferramentas para colocar o cliente no centro das decisões. O objectivo é transformar o foco no cliente numa prioridade executiva em Angola, substituindo opiniões por dados, exemplos concretos e frameworks aplicáveis em contexto local.',
 ]
 
 export type Speaker = { slug: string; name: string; role: string; company: string }
@@ -63,36 +62,6 @@ export const speakers: Speaker[] = [
   { slug: 'paulo-costa', name: 'Paulo Costa', role: 'Subdirector de CX', company: 'NOSSA Seguros' },
   { slug: 'antonio-rodrigues', name: 'António Rodrigues', role: 'CEO', company: 'MI6' },
   { slug: 'joao-matos', name: 'João Matos', role: 'Director Business Consulting', company: 'EY Portugal' },
-]
-
-export type Segment = { time: string; kind: string; title: string; text: string; voices?: string[] }
-
-// Alinhamento da edição de 2026 (referência do formato).
-export const rundown: Segment[] = [
-  { time: '08:30', kind: 'Abertura', title: 'Recepção e credenciamento', text: 'Boas-vindas aos participantes e entrada no espaço do evento.' },
-  {
-    time: '09:10',
-    kind: 'Keynotes',
-    title: 'A Experiência do Cliente como activo estratégico',
-    text: 'Bloco 1: visão, liderança e escala.',
-    voices: ['eduardo-bettencourt', 'marcus-valdez', 'rossana-neves', 'bazeka-kawenge'],
-  },
-  {
-    time: '10:45',
-    kind: 'Ferramentas úteis',
-    title: 'CX Customer Feeling Report 2025',
-    text: 'CX que se mede, gere e dá retorno.',
-    voices: ['josemar-afonso'],
-  },
-  { time: '11:15', kind: 'Case study', title: 'Check-In', text: 'Apresentação de Mário Rafael, CEO da Check-In.' },
-  {
-    time: '13:10',
-    kind: 'Mesa redonda',
-    title: 'Da promessa à realidade',
-    text: 'Quatro marcas, uma pergunta: o que muda quando se escuta o cliente?',
-    voices: ['fabio-santos', 'miguel-pinheiro', 'paulo-costa', 'antonio-rodrigues'],
-  },
-  { time: '15:00', kind: 'Networking', title: 'Encerramento e networking', text: 'Networking final na zona das activações das marcas.' },
 ]
 
 export type Frame =
