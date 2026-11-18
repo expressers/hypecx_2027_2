@@ -1,5 +1,12 @@
 import { about, transcript } from '@/content'
 
+/** Converte **texto** em <strong>. */
+function rich(text: string) {
+  return text.split(/(\*\*[^*]+\*\*)/g).map((part, i) =>
+    part.startsWith('**') && part.endsWith('**') ? <strong key={i}>{part.slice(2, -2)}</strong> : part,
+  )
+}
+
 export function Why() {
   let i = 0
   return (
@@ -20,7 +27,7 @@ export function Why() {
         <div className="why-body">
           {about.map((paragraph, index) => (
             <p key={index} className={index === 0 ? 'why-body-lead' : undefined}>
-              {paragraph}
+              {rich(paragraph)}
             </p>
           ))}
         </div>

@@ -44,9 +44,10 @@ export const transcript = [
   'É o ponto de viragem para começar a fazer CX. Com seriedade, escala e impacto.',
 ]
 
+// **texto** marca os destaques a negrito pedidos pela Targeting.
 export const about = [
-  'O Hype CX é o maior evento sobre Customer Experience, Estratégias de Negócios, Marketing e Vendas em Angola.',
-  'Mais do que um espaço de discussão, o Hype CX é uma plataforma de transformação prática, um palco com densidade intelectual e curadoria rigorosa a nível do conteúdo, onde líderes empresariais e profissionais com vasta experiência partilham estratégias, dados e ferramentas para colocar o cliente no centro das decisões. O objectivo é transformar o foco no cliente numa prioridade executiva em Angola, substituindo opiniões por dados, exemplos concretos e frameworks aplicáveis em contexto local.',
+  'O Hype CX é o maior evento sobre **Customer Experience, Estratégias de Negócios, Marketing e Vendas em Angola**.',
+  'Mais do que um espaço de discussão, o Hype CX é uma plataforma de transformação prática, um **palco com densidade intelectual e curadoria rigorosa a nível do conteúdo**, onde líderes empresariais e profissionais com vasta experiência partilham estratégias, dados e ferramentas para **colocar o cliente no centro das decisões**. O objectivo é transformar o foco no cliente numa prioridade executiva em Angola, substituindo opiniões por dados, exemplos concretos e frameworks aplicáveis em contexto local.',
 ]
 
 export type Speaker = { slug: string; name: string; role: string; company: string }
